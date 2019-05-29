@@ -15,26 +15,47 @@ from Crypto.Hash import SHA256
 
 def generate_keys():
 	"""
-	Building blocks of the Blockchain
+	Returns private & public keys
+	generated with the RSA algorithm
 	"""
 	random_generator = Random.new().read
 	private_key = RSA.generate(1024, random_generator)
 	public_key = private_key.publickey()
-
-plaintext = 'data'
-cipher_rsa = PKCS1_OAEP.new(public_key)
-cipher_text = cipher_rsa.encrypt(plaintext.encode())
-
-
-cipher_rsa2 = PKCS1_OAEP.new(private_key)
-rec = cipher_rsa2.decrypt(cipher_text)
-
-print(rec)
+	return private_key,public_key
 
 
 
-hash = SHA256.new(plaintext.encode()).digest()
+def sign_message(plaintext, private_key):
+	"""
+	Returns the signature of a message using the private key
+	"""
+	Hash = SHA256.new(plaintext.encode()).digest()
+	return private_key.sign(hash, ''), Hash
+	
 
-signature = private_key.sign(hash, '')
-print(public_key.verify(hash, signature))
+
+def verify_message(signature, Hash, public_key):
+	"""
+	Verify that the message has been signed by the right private key
+	"""
+	return public_key.verify(Hash, signature)
+
+
+def encrypt(public_key, plaintext):
+	"""
+	Encrypt a message using the RSA standard
+	"""
+	cipher_rsa = PKCS1_OAEP.new(public_key)
+	cipher_text = cipher_rsa.encrypt(plaintext.encode())
+	return cipher_text
+
+
+def decrypt(private_key, cipher_text):
+	"""
+	Decrypt a message encrypted with the RSA standard
+	"""
+	cipher_rsa = PKCS1_OAEP.new(private_key)
+	plaintext = cipher_rsa.decrypt(cipher_text)
+	return plaintext
+
 
