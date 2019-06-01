@@ -1,9 +1,9 @@
 """
 	blockchain with tokens and coinbase by Vincent LIU and Samir SAYAH - MAIN - Polytech Sorbonne
-	Inspired by: https://anders.com/blockchain/coinbase.html
+	Inspired by: https://anders.com/blockchain/public-private-keys/blockchain.html
 
-	Usage: python block3.py
-	Or:    mpirun -n 4 python block3.py
+	Usage: python block4.py
+	Or:    mpirun -n 4 python block4.py
 """
 
 
