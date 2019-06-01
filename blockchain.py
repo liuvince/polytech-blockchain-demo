@@ -1,16 +1,17 @@
 """
 	blockchain by Vincent LIU and Samir SAYAH - MAIN - Polytech Sorbonne
-		Inspired by: https://anders.com/blockchain/blockchain.html
+	Inspired by: https://anders.com/blockchain/blockchain.html
 
-		Usage: python blockchain.py
-		Or:    mpirun -n 4 python blockchain.py
+	Usage: python blockchain.py
+	Or:    mpirun -n 4 python blockchain.py
 """
 
 
 
 
 from hash import sha256
-from block import Block, difficulty, pattern
+from block1 import Block, difficulty, pattern
+from block2 import Block_v2
 from mpi4py import MPI
 import sys
 import numpy
@@ -30,7 +31,6 @@ class Blockchain(object):
 	def add(self,b):
 		if self.tail == None:
 			self.tail = b
-			b.previous = "0" * 64
 		else:
 			b.previous = self.head
 			self.head.next = b
@@ -61,14 +61,17 @@ if __name__ == "__main__":
 
 	bchain = Blockchain()
 
-	bchain.add( Block(1, 11316, "") )
-	bchain.add( Block(2, 35230, "") )
-	bchain.add( Block(3, 12937, "") )
-	bchain.add( Block(4, 35990, "") )
-	bchain.add( Block(5, 56265, "") )
+	bchain.add( Block_v2(1, 11316, "") )
+	bchain.add( Block_v2(2, 35230, "") )
+	bchain.add( Block_v2(3, 12937, "") )
+	bchain.add( Block_v2(4, 35990, "") )
+	bchain.add( Block_v2(5, 56265, "") )
 
 	if rank == 0:
 		bchain.show()
+
+		print("We add the char 'f' to the first data")
+		print("The blocks are not valid anymore\n")
 
 	i = 1
 	bchain.get_block(i).data = "f"
@@ -79,4 +82,5 @@ if __name__ == "__main__":
 	bchain.mine()
 
 	if rank == 0:
+		print("We mine the blockchain to find the good nonces")
 		bchain.show()

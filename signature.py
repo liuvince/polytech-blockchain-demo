@@ -1,7 +1,6 @@
-"""
+"""	
 	Public/Private key signatures by Vincent LIU and Samir SAYAH - MAIN - Polytech Sorbonne
 	Inspired by: https://anders.com/blockchain/hash.html
-
 	Usage: python .py [your_input]
 """
 
@@ -21,7 +20,7 @@ def generate_keys():
 	random_generator = Random.new().read
 	private_key = RSA.generate(1024, random_generator)
 	public_key = private_key.publickey()
-	return private_key,public_key
+	return public_key, private_key
 
 
 
@@ -30,7 +29,7 @@ def sign_message(plaintext, private_key):
 	Returns the signature of a message using the private key
 	"""
 	Hash = SHA256.new(plaintext.encode()).digest()
-	return private_key.sign(hash, ''), Hash
+	return private_key.sign(Hash, ''), Hash
 	
 
 
@@ -58,4 +57,13 @@ def decrypt(private_key, cipher_text):
 	plaintext = cipher_rsa.decrypt(cipher_text)
 	return plaintext
 
+def key_to_string(key):
+	s = key.exportKey("PEM")
+	s = s.split("\n")
+	s = s[1:-1]
+	s = "".join(s)
+	return s
 
+a, b = generate_keys()
+print(a.exportKey("PEM"))
+print(key_to_string(a))
