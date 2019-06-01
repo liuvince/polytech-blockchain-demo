@@ -1,5 +1,6 @@
 # blockchain-demo
-blockchain in python inspired by anders
+
+We tried to implement [Anders's](https://github.com/anders94) blockchain demo in Python in order to get familiar with blockchain.
 
 ## Getting Started with SHA256
 ```
@@ -38,6 +39,16 @@ Or, with MPI:
 mpirun -n 4 python block3.py
 ```
 Inspired by [Anders - Blockchain with Tokens and Coinbase](https://anders.com/blockchain/coinbase.html)
+
+## Adding public and private key pairs and signing to our Blockchain
+```
+python block4.py
+```
+Or, with MPI:
+```
+mpirun -n 4 python block4.py
+```
+Inspired by [Anders - public and private keys with blockchain]https://anders.com/blockchain/public-private-keys/blockchain.html)
 
 
 
