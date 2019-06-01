@@ -28,7 +28,7 @@ class Block_v2(Block):
 	def show(self):
                 # Your result
                 print("\n=================")
-                print("=== Block =======")
+                print("===== Block =====")
                 print("=================\n")
                 print("Block: #{}".format(self.block))
                 print("Nonce: {}".format(self.nonce))
