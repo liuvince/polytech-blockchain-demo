@@ -48,7 +48,18 @@ Or, with MPI:
 ```
 mpirun -n 4 python block4.py
 ```
-Inspired by [Anders - public and private keys with blockchain]https://anders.com/blockchain/public-private-keys/blockchain.html)
+Inspired by [Anders - public and private keys with blockchain](https://anders.com/blockchain/public-private-keys/blockchain.html)
+
+## Authors
+
+* **Vincent Liu** - *Polytech Sorbonne - MAIN 2019* - [LinkedIn](https://www.linkedin.com/in/liuvince25/)
+* **Samir Sayah** - *Polytech Sorbonne - MAIN 2019* - [LinkedIn](https://www.linkedin.com/in/samir-sayah-509846151/)
+
+## Acknowledgments
+
+* Inspiration from [Anders](https://github.com/anders94) and [Adil Moujahid](https://github.com/adilmoujahid/blockchain-python-tutorial)
+
+
 
 
 
