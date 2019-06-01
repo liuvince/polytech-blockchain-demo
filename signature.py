@@ -63,7 +63,3 @@ def key_to_string(key):
 	s = s[1:-1]
 	s = "".join(s)
 	return s
-
-a, b = generate_keys()
-print(a.exportKey("PEM"))
-print(key_to_string(a))
