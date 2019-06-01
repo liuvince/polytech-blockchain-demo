@@ -39,50 +39,51 @@ class Block(object):
 		return sha256(str(self.block) + str(i) +  self.data)
 
 	def mine(self):
-		"""
+
+            """
 		We are looking for a nonce number which make our hash starts with "0000"
-	"""
+	    """
 
-		# Initialize MPI
-		comm = MPI.COMM_WORLD
-		size = comm.Get_size() # Returns the number of tasks in comm
-		rank = comm.Get_rank()	# Returns the rank of the calling task
+	    # Initialize MPI
+            comm = MPI.COMM_WORLD
+	    size = comm.Get_size() # Returns the number of tasks in comm
+	    rank = comm.Get_rank()	# Returns the rank of the calling task
 
-		rd = 0 # "Round"
-		end = 0 
+	    rd = 0 # "Round"
+	    end = 0 
 
-		start = rank * 10000
-		status = MPI.Status()
+	    start = rank * 10000
+	    status = MPI.Status()
 
-		while(end == False):
-			imin = rd * 10000 * size + start
+	    while(end == False):
+	    	imin = rd * 10000 * size + start
 
-			#print(rank, imin,imin + 10000)
-			for i in range(imin, imin + 10000):
+	    	#print(rank, imin,imin + 10000)
+    		for i in range(imin, imin + 10000):
 
-				text_hash = self.text_hash(i)
+    			text_hash = self.text_hash(i)
 
-				s = comm.Iprobe(source = MPI.ANY_SOURCE, tag = 42, status = status)
-				if s:
-					data = comm.recv( source=status.source, tag = 42)
-					self.nonce = str(data['nonce'])
-					end = True
-					break	
-				if (text_hash[0:difficulty] == pattern):
-					self.nonce = str(i)
-					for dst in range(size):
-						if dst != rank:
-							data = {'nonce': i}
-							comm.send(data, dest = dst, tag = 42)
-					end = True
-					break	
-			rd += 1
+    			flag = comm.Iprobe(source = MPI.ANY_SOURCE, tag = 42, status = status)
+		    	if flag:
+		    		data = comm.recv( source=status.source, tag = 42)
+	    			self.nonce = str(data['nonce'])
+                                end = True
+                                break
+			if (text_hash[0:difficulty] == pattern):
+				self.nonce = str(i)
+				for dst in range(size):
+			        	if dst != rank:
+			    			data = {'nonce': i}
+		    				comm.send(data, dest = dst, tag = 42)
+                                end = True
+				break	
+		rd += 1
 
 
 	def show(self):
 		# Your result
 		print("\n=================")
-		print("=== Block =======")
+		print("===== Block =====")
 		print("=================\n")
 		print("Block: #{}".format(self.block))
 		print("Nonce: {}".format(self.nonce)) 
@@ -108,11 +109,12 @@ if __name__ == "__main__":
 		Block_num = "1"
 		Nonce = ""
 		Data = ""
-	
+
+	# Create a Block object with given parameters	
 	block = Block(Block_num, Nonce, Data)
 
 	if rank == 0:
-		print("\nBefore:")
+		print("\nBefore mining:")
 		block.show()
 
 	block.mine()
