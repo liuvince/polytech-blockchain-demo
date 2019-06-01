@@ -133,7 +133,7 @@ if __name__ == "__main__":
 
 	Coinbase = {"amount": "100.00", "recipient": P1.pubkey}  
 	T = [Tx("100", P1.public_key, P2.public_key, P1.private_key)]
-	bchain.add( Block_v4(block = "1", nonce = "16651", coinbase = Coinbase, tx = T) )
+	bchain.add( Block_v4(block = "2", nonce = "16651", coinbase = Coinbase, tx = T) )
 
 	if rank == 0:
 		bchain.show()
