@@ -44,6 +44,9 @@ class Blockchain(object):
 			point = point.next
 
 	def show(self):
+		print("\t\t\t=================")
+		print("\t\t\t== BLOCK CHAIN ==")
+		print("\t\t\t=================")
 		point = self.tail
 		while point:
 			point.show()
