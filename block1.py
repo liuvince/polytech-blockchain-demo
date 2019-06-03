@@ -13,6 +13,7 @@ from hash import sha256
 from mpi4py import MPI
 import sys
 import numpy 
+#import time
 
 difficulty = 4
 pattern = "0" * difficulty
@@ -117,9 +118,14 @@ if __name__ == "__main__":
 		print("\nBefore mining:")
 		block.show()
 
+	#start_time = time.time()
 	block.mine()
+	#stop_time = time.time()
 	
 	if rank == 0:
 		print("After mining:")
 		block.show()
+                #print("time spent with", size, "threads in ms")
+                #print("-----", int((stop_time-start_time)*1000),"-----")
+
 
