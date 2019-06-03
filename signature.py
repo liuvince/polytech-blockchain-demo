@@ -1,7 +1,6 @@
 """	
 	Public/Private key signatures by Vincent LIU and Samir SAYAH - MAIN - Polytech Sorbonne
 	Inspired by: https://anders.com/blockchain/hash.html
-	Usage: python .py [your_input]
 """
 
 from Crypto.PublicKey import RSA
