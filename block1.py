@@ -63,7 +63,7 @@ class Block(object):
     		for i in range(imin, imin + 10000):
 
     			text_hash = self.text_hash(i)
-
+			# /!\ Mutual exclusion
     			flag = comm.Iprobe(source = MPI.ANY_SOURCE, tag = 42, status = status)
 		    	if flag:
 		    		data = comm.recv( source=status.source, tag = 42)
